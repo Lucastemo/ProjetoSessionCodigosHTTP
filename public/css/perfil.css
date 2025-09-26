@@ -1,0 +1,89 @@
+.explorar{
+    background-color: #2273b4;
+    width: 300px;
+    position: fixed;
+    top: 100px;
+    right: 0;
+    border-bottom-left-radius: 20px;
+    padding-bottom: 20px;
+    transition: all 0.5s ease-in;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.explorar::before{
+    content: "<";
+    font-weight: 600;
+    font-size: 30px;
+    position: fixed;
+    right: 0;
+    background-color: #6cabdf;
+    width: 40px;
+    height: 50px;
+    border-radius: 20px 0 0 20px;
+    transform: translate(-300px, 0);
+}
+
+.explorar h3{
+    background-color: #6cabdf;
+    font-size: 24px;
+    padding: 5px 0;
+    width: 100%;
+    height: 50px;
+    border: 0;
+}
+
+.escondido{
+    transform: translate(100%, 0);
+    transition: all 0.5s ease-out;
+}
+
+.escondido::before{
+    content: ">";
+}
+
+.link{
+    text-decoration: none;
+    font-weight: 300;
+    color: darkblue;
+    cursor: pointer;
+    padding: 0 20px;
+}
+
+.titleLink{
+    font-size: 22px;
+}
+
+.cod400, .cod500{
+    display: none;
+    flex-direction: column;
+    text-align: left;
+}
+
+.c400title:hover ~ .cod400, .cod400:hover{
+    display: flex;
+}
+
+.c500title:hover ~ .cod500, .cod500:hover{
+    display: flex;
+}
+
+.hovereable-link::after{
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 0;
+    background-color: darkblue;
+    transform: translate(150px, 25px);
+    transition: all 0.2s ease;
+    margin: 0 10px;
+    left: 0;
+}
+
+.hovereable-link:hover::after{
+    height: 1px;
+    width: calc(100% - 20px);
+    background-color: darkblue;
+    transform: translate(0px, 25px);
+}

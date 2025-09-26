@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/perfil.css">
+</head>
+
+<body>
+    <nav>
+        <h1>Códigos HTTP</h1>
+        <h2 id="userName"></h2>
+        <a onclick="logout()">Sair</a>
+    </nav>
+    <div class="explorar escondido" onclick="mostraEscondeExplorar()">
+        <h3>Explorar</h3>
+        <a href="" class="link titleLink c400title hovereable-link">Código 400</a>
+        <div class="cod400">
+            <a href="" class="link hovereable-link">401 Unauthorized</a>
+            <a href="" class="link hovereable-link">403 Forbidden</a>
+            <a href="" class="link hovereable-link">405 Method Not Allowed</a>
+            <a href="" class="link hovereable-link">409 Conflict</a>
+            <a href="" class="link hovereable-link">429 Too Many Requests</a>
+        </div>
+        <a href="" class="link titleLink c500title hovereable-link">Código 500</a>
+        <div class="cod500">
+            <a href="" class="link hovereable-link">503 Service Unavailable</a>
+        </div>
+    </div>
+    <div id="perfilDiv" style="display: none;">
+        <h2>Perfil</h2>
+        <p id="perfilMsg"></p>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        const baseUrl = 'http://localhost:3000';
+        let mostrar = false;
+
+        async function onLoad() {
+            const res = await fetch(`${baseUrl}/perfil`, {
+                method: 'GET',
+                credentials: 'include'
+            })
+            const text = await res.text();
+            if (text.trim() != "") {
+                const userName = text.slice(0,1).toUpperCase() + text.slice(1,text.length);
+                document.getElementById('perfilDiv').style.display = 'block';
+                document.getElementById('perfilMsg').innerText = text;
+                document.getElementById('userName').innerText = userName;
+            } else {
+                alert('Você não está logado');
+            }
+        }
+
+        async function logout() {
+            const res = await fetch(`${baseUrl}/logout`, {
+                method: 'GET',
+                credentials: 'include'
+            });
+            const text = await res.text();
+            alert(text);
+            window.location.href = 'index.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', async function () {
+            await onLoad();
+        });
+
+        function mostraEscondeExplorar(){
+            mostrar = !mostrar;
+            if(mostrar){
+                document.getElementsByClassName('explorar')[0].classList = "explorar";
+            }else{
+                setTimeout(() => {
+                    document.getElementsByClassName('explorar')[0].classList = "explorar escondido";
+                }, 200);
+            }
+        }
+    </script>
+</body>
+
+</html>

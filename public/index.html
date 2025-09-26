@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="loginDiv">
+        <h1>Atividade de Login</h1>
+        <h3>Faça login para acessar o site</h3>
+        <form id="login-form">
+            <div class="input-div">
+                <label for="username">Nome de Usuário:</label>
+                <input type="text" id="username" placeholder="Digite seu nome de usuário">
+            </div>
+            <div class="input-div">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" placeholder="Digite sua senha">
+            </div>
+            <div class="buttons-div">
+                <input type="submit" value="Fazer login">
+                <input type="reset" value="Limpar">
+            </div>
+            <p id="loginMsg"></p>
+        </form>
+    </div>
+</body>
+
+<script>
+    const baseUrl = 'http://localhost:3000';
+    const form = document.getElementById('login-form');
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        const res = await fetch(`${baseUrl}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password }),
+            credentials: 'include'
+        });
+        const text = await res.text();
+        
+        if (text.includes('bem sucedido')) {
+            window.location.href = 'perfil.html';
+            return;
+        }
+        
+        document.getElementById('loginMsg').innerText = text;
+    });
+
+    async function getPerfil() {
+        const res = await fetch(`${baseUrl}/perfil`, {
+            method: 'GET',
+            credentials: 'include'
+        });
+        const text = await res.text();
+        document.getElementById('perfilMsg').innerText = text;
+    }
+</script>
+
+</html>
