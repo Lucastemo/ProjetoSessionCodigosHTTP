@@ -53,7 +53,7 @@
             })
             const text = await res.text();
             if (text.trim() != "") {
-                const userName = text.slice(0, 1).toUpperCase() + text.slice(1, text.length);
+                const userName = text.slice(0, 1).toUpperCase() + text.slice(1, text.length).toLowerCase();
                 document.getElementById('contentDiv').style.display = 'block';
                 document.getElementById('perfilMsg').innerText = userName;
                 document.getElementById('userName').innerText = userName;

@@ -45,7 +45,7 @@ app.post('/login', (req, res) => {
 
     const { username, password } = req.body;
 
-    if (username === 'marcos' && password === '123') {
+    if (username.toUpperCase() === 'marcos'.toUpperCase() && password === '123') {
 
         req.session.usuario = username;
         res.send('Login bem sucedido!');
