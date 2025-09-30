@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Código Status</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+  <nav>
+    <h1 id="tipoStatus"></h1>
+    <h2 id="userName"></h2>
+    <a onclick="logout()">Sair</a>
+    <a href="/perfil.html">Perfil</a> 
+  </nav>
+
+  <div class="explorar escondido" onclick="mostraEscondeExplorar()">
+    <h3>Explorar</h3>
+    <a href="/codStatus/400.html?status=cod400" class="link titleLink c400title hovereable-link">Código 400</a>
+    <div class="cod400">
+      <a href="/codStatus/400.html?status=cod401" class="link hovereable-link">401 Unauthorized</a>
+      <a href="/codStatus/400.html?status=cod403" class="link hovereable-link">403 Forbidden</a>
+      <a href="/codStatus/400.html?status=cod405" class="link hovereable-link">405 Method Not Allowed</a>
+      <a href="/codStatus/400.html?status=cod409" class="link hovereable-link">409 Conflict</a>
+      <a href="/codStatus/400.html?status=cod429" class="link hovereable-link">429 Too Many Requests</a>
+    </div>
+    <a href="/codStatus//500.html?status=cod500" class="link titleLink c500title hovereable-link">Código 500</a>
+    <div class="cod500">
+      <a href="/codStatus/500.html?status=cod501" class="link hovereable-link">501 Not Implemented</a>
+      <a href="/codStatus/500.html?status=cod502" class="link hovereable-link">502 Bad Gateway</a>
+      <a href="/codStatus/500.html?status=cod503" class="link hovereable-link">503 Service Unavailable</a>
+      <a href="/codStatus/500.html?status=cod504" class="link hovereable-link">504 Gateway Timeout</a>
+      <a href="/codStatus/500.html?status=cod505" class="link hovereable-link">505 HTTP Version Not Supported</a>
+    </div>
+  </div>
+
+  <h1 id="tipoStatus">
+    </h2>
+    <div id="container">
+      <p id="sobreStatus"></p>
+    </div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const codStatus = params.get("status");
+
+      const tipoStatus = document.getElementById("tipoStatus");
+      const sobreStatus = document.getElementById("sobreStatus");
+
+      switch (codStatus) {
+        case "cod500":
+          tipoStatus.innerText = "500 Internal Server Error";
+          sobreStatus.innerText =
+            `O servidor encontrou uma situação com a qual não sabe lidar.`;
+          break;
+
+        case "cod501":
+          tipoStatus.innerText = "501 Not Implemented";
+          sobreStatus.innerText =
+            `O método da requisição não é suportado pelo servidor e não pode 
+            ser manipulado. Os únicos métodos que servidores devem suportar 
+            (e portanto não devem retornar este código) são GET e HEAD.`;
+          break;
+
+        case "cod502":
+          tipoStatus.innerText = "502 Bad Gateway";
+          sobreStatus.innerText =
+            `Essa resposta de erro significa que o servidor, enquanto trabalhava
+             como um gateway para obter uma resposta necessária para lidar com a 
+             solicitação, obteve uma resposta inválida.`;
+          break;
+
+        case "cod503":
+          tipoStatus.innerText = "503 Service Unavailable";
+          sobreStatus.innerText =
+            `O servidor não está pronto para manipular a requisição Causas comuns são um servidor 
+            em manutenção ou sobrecarregado. Note que junto a esta resposta, uma página amigável 
+            explicando o problema deveria ser enviada. Esta resposta deve ser usada para condições 
+            temporárias e o cabeçalho HTTP Retry-After deverá, se possível, conter o tempo estimado 
+            para recuperação do serviço. O webmaster deve também tomar cuidado com os cabeçalhos relacionados 
+            com o cache que são enviados com esta resposta, já que estas respostas de condições temporárias normalmente 
+            não deveriam ser postas em cache.`;
+          break;
+
+        case "cod504":
+          tipoStatus.innerText = "504 Gateway Timeout";
+          sobreStatus.innerText =
+            `Essa resposta de erro é fornecida quando o servidor está atuando como um gateway e não consegue obter
+             uma resposta a tempo.`;
+          break;
+
+        case "cod505":
+          tipoStatus.innerText = "505 HTTP Version Not Supported";
+          sobreStatus.innerText =
+            `A versão HTTP usada na requisição não é suportada pelo servidor.`;
+          break;
+
+        default:
+          tipoStatus.innerText = "Código não encontrado";
+          sobreStatus.innerText =
+            "Nenhuma informação disponível para este código de status.";
+          break;
+      }
+
+      
+      const baseUrl = 'http://localhost:3000';
+        let mostrar = false;
+
+        async function onLoad() {
+            const res = await fetch(`${baseUrl}/perfil`, {
+                method: 'GET',
+                credentials: 'include'
+            })
+            const text = await res.text();
+            if (text.trim() != "") {
+                const userName = text.slice(0,1).toUpperCase() + text.slice(1,text.length);
+                document.getElementById('userName').innerText = userName;
+            } else {
+                alert('Você não está logado');
+            }
+        }
+
+        async function logout() {
+            const res = await fetch(`${baseUrl}/logout`, {
+                method: 'GET',
+                credentials: 'include'
+            });
+            const text = await res.text();
+            alert(text);
+            window.location.href = '/index.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', async function () {
+            await onLoad();
+        });
+
+        function mostraEscondeExplorar(){
+            mostrar = !mostrar;
+            if(mostrar){
+                document.getElementsByClassName('explorar')[0].classList = "explorar";
+            }else{
+                setTimeout(() => {
+                    document.getElementsByClassName('explorar')[0].classList = "explorar escondido";
+                }, 200);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

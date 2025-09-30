@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/perfil.css">
 </head>
 
 <body>
@@ -15,19 +14,24 @@
         <h2 id="userName"></h2>
         <a onclick="logout()">Sair</a>
     </nav>
+
     <div class="explorar escondido" onclick="mostraEscondeExplorar()">
         <h3>Explorar</h3>
-        <a href="" class="link titleLink c400title hovereable-link">Código 400</a>
+        <a href="./codStatus/400.html?status=cod400" class="link titleLink c400title hovereable-link">Código 400</a>
         <div class="cod400">
-            <a href="" class="link hovereable-link">401 Unauthorized</a>
-            <a href="" class="link hovereable-link">403 Forbidden</a>
-            <a href="" class="link hovereable-link">405 Method Not Allowed</a>
-            <a href="" class="link hovereable-link">409 Conflict</a>
-            <a href="" class="link hovereable-link">429 Too Many Requests</a>
+            <a href="./codStatus/400.html?status=cod401" class="link hovereable-link">401 Unauthorized</a>
+            <a href="./codStatus/400.html?status=cod403" class="link hovereable-link">403 Forbidden</a>
+            <a href="./codStatus/400.html?status=cod405" class="link hovereable-link">405 Method Not Allowed</a>
+            <a href="./codStatus/400.html?status=cod409" class="link hovereable-link">409 Conflict</a>
+            <a href="./codStatus/400.html?status=cod429" class="link hovereable-link">429 Too Many Requests</a>
         </div>
-        <a href="" class="link titleLink c500title hovereable-link">Código 500</a>
+        <a href="./codStatus//500.html?status=cod500" class="link titleLink c500title hovereable-link">Código 500</a>
         <div class="cod500">
-            <a href="" class="link hovereable-link">503 Service Unavailable</a>
+            <a href="./codStatus/500.html?status=cod501" class="link hovereable-link">501 Not Implemented</a>
+            <a href="./codStatus/500.html?status=cod502" class="link hovereable-link">502 Bad Gateway</a>
+            <a href="./codStatus/500.html?status=cod503" class="link hovereable-link">503 Service Unavailable</a>
+            <a href="./codStatus/500.html?status=cod504" class="link hovereable-link">504 Gateway Timeout</a>
+            <a href="./codStatus/500.html?status=cod505" class="link hovereable-link">505 HTTP Version Not Supported</a>
         </div>
     </div>
     <div id="perfilDiv" style="display: none;">
@@ -80,6 +84,8 @@
                 }, 200);
             }
         }
+
+
     </script>
 </body>
 

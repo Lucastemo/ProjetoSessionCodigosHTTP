@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Código Status</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/codStatus.css">
+  </head>
+  <body>
+
+     <nav>
+        <h1 id="tipoStatus"></h1>
+        <h2 id="userName"></h2>
+        <a onclick="logout()">Sair</a>
+        <a href="/perfil.html">Perfil</a> 
+    </nav>
+
+     <div class="explorar escondido" onclick="mostraEscondeExplorar()">
+        <h3>Explorar</h3>
+        <a href="/codStatus/400.html?status=cod400" class="link titleLink c400title hovereable-link">Código 400</a>
+        <div class="cod400">
+            <a href="/codStatus/400.html?status=cod401" class="link hovereable-link">401 Unauthorized</a>
+            <a href="/codStatus/400.html?status=cod403" class="link hovereable-link">403 Forbidden</a>
+            <a href="/codStatus/400.html?status=cod405" class="link hovereable-link">405 Method Not Allowed</a>
+            <a href="/codStatus/400.html?status=cod409" class="link hovereable-link">409 Conflict</a>
+            <a href="/codStatus/400.html?status=cod429" class="link hovereable-link">429 Too Many Requests</a>
+        </div>
+        <a href="/codStatus//500.html?status=cod500" class="link titleLink c500title hovereable-link">Código 500</a>
+        <div class="cod500">
+            <a href="/codStatus/500.html?status=cod501" class="link hovereable-link">501 Not Implemented</a>
+            <a href="/codStatus/500.html?status=cod502" class="link hovereable-link">502 Bad Gateway</a>
+            <a href="/codStatus/500.html?status=cod503" class="link hovereable-link">503 Service Unavailable</a>
+            <a href="/codStatus/500.html?status=cod504" class="link hovereable-link">504 Gateway Timeout</a>
+            <a href="/codStatus/500.html?status=cod505" class="link hovereable-link">505 HTTP Version Not Supported</a>
+        </div>
+    </div>
+    <div id="container">
+      <p id="sobreStatus"></p>
+    </div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const codStatus = params.get("status");
+
+      const tipoStatus = document.getElementById("tipoStatus");
+      const sobreStatus = document.getElementById("sobreStatus");
+
+      switch (codStatus) {
+        case "cod400":
+          tipoStatus.innerText = "400 Bad Request";
+          sobreStatus.innerText = 
+            `O servidor não pode ou não irá processar a solicitação devido a algo que
+            é percebido como um erro do cliente (por exemplo, sintaxe de solicitação
+            malformada, enquadramento de mensagem de solicitação inválida ou
+            roteamento de solicitação enganosa).`;
+          break;
+
+        case "cod401":
+          tipoStatus.innerText = "401 Unauthorized";
+          sobreStatus.innerText =
+            `Embora o padrão HTTP especifique "unauthorized", semanticamente, essa resposta 
+            significa "unauthenticated". Ou seja, o cliente deve se autenticar para obter a 
+            resposta solicitada.`;
+          break;
+
+        case "cod403":
+          tipoStatus.innerText = "403 Forbidden";
+          sobreStatus.innerText =
+            `O cliente não tem direitos de acesso ao conteúdo; ou seja, não é autorizado, portanto 
+            o servidor está se recusando a fornecer o recurso solicitado. Ao contrário do 401 Unauthorized, 
+            a identidade do cliente é conhecida pelo servidor.`;
+          break;
+
+        case "cod405":
+          tipoStatus.innerText = "405 Method Not Allowed";
+          sobreStatus.innerText =
+            `O método de solicitação é conhecido pelo servidor, 
+            mas não é suportado pelo recurso de destino. Por exemplo, 
+            uma API pode não permitir chamar DELETE para remover um recurso.`;
+          break;
+
+        case "cod409":
+          tipoStatus.innerText = "409 Conflict";
+          sobreStatus.innerText =
+            `Esta resposta será enviada quando uma requisição conflitar com o estado atual do servidor.`;
+          break;
+
+        case "cod429":
+          tipoStatus.innerText = "429 Too Many Requests";
+          sobreStatus.innerText =
+            `O usuário enviou muitas requisições num dado tempo ("limitação de frequência").`;
+          break;
+
+        default:
+          tipoStatus.innerText = "Código não encontrado";
+          sobreStatus.innerText =
+            "Nenhuma informação disponível para este código de status.";
+          break;
+      }
+
+      const baseUrl = 'http://localhost:3000';
+        let mostrar = false;
+
+        async function onLoad() {
+            const res = await fetch(`${baseUrl}/perfil`, {
+                method: 'GET',
+                credentials: 'include'
+            })
+            const text = await res.text();
+            if (text.trim() != "") {
+                const userName = text.slice(0,1).toUpperCase() + text.slice(1,text.length);
+                document.getElementById('userName').innerText = userName;
+            } else {
+                alert('Você não está logado');
+            }
+        }
+
+        async function logout() {
+            const res = await fetch(`${baseUrl}/logout`, {
+                method: 'GET',
+                credentials: 'include'
+            });
+            const text = await res.text();
+            alert(text);
+            window.location.href = '/index.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', async function () {
+            await onLoad();
+        });
+
+        function mostraEscondeExplorar(){
+            mostrar = !mostrar;
+            if(mostrar){
+                document.getElementsByClassName('explorar')[0].classList = "explorar";
+            }else{
+                setTimeout(() => {
+                    document.getElementsByClassName('explorar')[0].classList = "explorar escondido";
+                }, 200);
+            }
+        }
+
+    </script>
+  </body>
+</html>
