@@ -12,16 +12,17 @@ body {
     text-align: center;
 }
 
-h1, b{
+h1,
+b {
     font-weight: 500;
 }
 
-h1{
+h1 {
     font-size: 40px;
     margin: 20px 0;
 }
 
-h3{
+h3 {
     font-weight: 400;
     border-bottom: 1px solid rgba(0, 0, 0, 0.5);
     width: 40%;
@@ -46,7 +47,7 @@ form,
     margin-bottom: 5px;
 }
 
-.input-div label{
+.input-div label {
     user-select: none;
 }
 
@@ -74,7 +75,7 @@ form,
     outline: none;
 }
 
-.buttons-div{
+.buttons-div {
     width: 20vw;
     margin: 0 auto;
     display: flex;
@@ -82,7 +83,8 @@ form,
     column-gap: 10px;
 }
 
-.buttons-div input {
+.buttons-div input,
+#contentDiv div button {
     height: 40px;
     width: 100%;
     font-size: 18px;
@@ -110,28 +112,28 @@ form,
     background-color: rgb(221, 85, 61);
 }
 
-#loginMsg{
+#loginMsg {
     margin: 20px 0 5px;
     font-size: 22px;
     font-weight: 500;
     color: darkred;
 }
 
-nav{
+nav {
     background-color: #4094da;
     height: 60px;
     display: flex;
     flex-direction: row;
 }
 
-nav h1{
+nav h1 {
     margin: 0;
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
 }
 
-nav #userName{
+nav #userName {
     margin: 0 auto 0 0;
     width: auto;
     margin: 10px 20px 20px;
@@ -140,7 +142,7 @@ nav #userName{
     border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-nav a{
+nav a {
     margin: 14px auto 0 0;
     font-size: 18px;
     font-weight: 400;
@@ -148,7 +150,7 @@ nav a{
     cursor: pointer;
 }
 
-nav a::after{
+nav a::after {
     content: "";
     position: absolute;
     height: 1px;
@@ -158,32 +160,86 @@ nav a::after{
     transition: all 0.2s ease;
 }
 
-nav a:hover::after{
+nav a:hover::after {
     height: 1px;
     width: 50px;
     background-color: darkblue;
     transform: translate(-40px, 25px);
 }
 
-nav a:last-child{
+nav a:last-child {
     position: absolute;
     right: 20px;
     text-decoration: none;
 }
 
-nav a:last-child::after{
+nav a:last-child::after {
     transform: translate(-20px, 25px);
     width: 0px;
 }
 
-nav a:last-child:hover::after{
+nav a:last-child:hover::after {
     transform: translate(-50px, 25px);
     width: 58px;
 }
 
+/*CONTENT*/
+
+#contentDiv {
+    background-color: #4094da;
+    width: 30%;
+    margin: 30px auto;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+#contentDiv h2 {
+    font-size: 40px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+    width: 70%;
+    margin: 0 auto;
+}
+
+#contentDiv div {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    width: 50%;
+    column-gap: 20px;
+}
+
+#contentDiv div * {
+    width: 100%;
+    margin: 10px 0;
+    height: 40px;
+    font-size: 22px;
+}
+
+#contentDiv div button {
+    margin: 10px 0;
+    background-color: lightcoral;
+}
+
+#contentDiv div button:hover {
+    background-color: rgb(231, 108, 108);
+}
+
+/*INFO*/
+
+.statusInfo {
+    width: 50% !important;
+    padding: 20px 30px;
+    font-size: 20px;
+}
+
+.statusInfo #sobreStatus {
+    text-align: justify;
+    text-indent: 15px;
+}
+
 /*MENU EXPLORAR*/
 
-.explorar{
+.explorar {
     background-color: #2273b4;
     width: 300px;
     position: fixed;
@@ -197,7 +253,7 @@ nav a:last-child:hover::after{
     flex-direction: column;
 }
 
-.explorar::before{
+.explorar::before {
     content: "<";
     font-weight: 600;
     font-size: 30px;
@@ -210,7 +266,7 @@ nav a:last-child:hover::after{
     transform: translate(-300px, 0);
 }
 
-.explorar h3{
+.explorar h3 {
     background-color: #6cabdf;
     font-size: 24px;
     padding: 5px 0;
@@ -219,16 +275,16 @@ nav a:last-child:hover::after{
     border: 0;
 }
 
-.escondido{
+.escondido {
     transform: translate(100%, 0);
     transition: all 0.5s ease-out;
 }
 
-.escondido::before{
+.escondido::before {
     content: ">";
 }
 
-.link{
+.link {
     text-decoration: none;
     font-weight: 300;
     color: darkblue;
@@ -236,25 +292,28 @@ nav a:last-child:hover::after{
     padding: 0 20px;
 }
 
-.titleLink{
+.titleLink {
     font-size: 22px;
 }
 
-.cod400, .cod500{
+.cod400,
+.cod500 {
     display: none;
     flex-direction: column;
     text-align: left;
 }
 
-.c400title:hover ~ .cod400, .cod400:hover{
+.c400title:hover~.cod400,
+.cod400:hover {
     display: flex;
 }
 
-.c500title:hover ~ .cod500, .cod500:hover{
+.c500title:hover~.cod500,
+.cod500:hover {
     display: flex;
 }
 
-.hovereable-link::after{
+.hovereable-link::after {
     content: "";
     position: absolute;
     height: 1px;
@@ -266,7 +325,7 @@ nav a:last-child:hover::after{
     left: 0;
 }
 
-.hovereable-link:hover::after{
+.hovereable-link:hover::after {
     height: 1px;
     width: calc(100% - 20px);
     background-color: darkblue;
